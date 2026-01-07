@@ -122,7 +122,11 @@ export default function importMapPlugin(options?: ImportMapPluginOptions): Plugi
           const importsToTransform: Array<{start: number; end: number; replacement: string}> = [];
           
           const handleImportSource = (node: ImportDeclaration | ExportNamedDeclaration | ExportAllDeclaration | ImportExpression, importType: string) => {
-            const specifier = (node as ImportDeclaration | ExportNamedDeclaration | ExportAllDeclaration).source?.value;
+            const source = (node as ImportDeclaration | ExportNamedDeclaration | ExportAllDeclaration).source;
+            if (!source) {
+              return;
+            }
+            const specifier = source.value;
             if (!specifier || typeof specifier !== 'string') {
               return;
             }
@@ -140,11 +144,11 @@ export default function importMapPlugin(options?: ImportMapPluginOptions): Plugi
               }
               return;
             }
-            if (node.source.start === undefined || node.source.end === undefined) return;
+            if (source.start === undefined || source.end === undefined) return;
             
             importsToTransform.push({
-              start: node.source.start + 1,
-              end: node.source.end - 1,
+              start: source.start + 1,
+              end: source.end - 1,
               replacement: moduleSpec,
             });
           };
@@ -275,7 +279,7 @@ export default function importMapPlugin(options?: ImportMapPluginOptions): Plugi
             injectTo: 'head-prepend', // Inject at the beginning of <head> (before other scripts)
           },
         ],
-      };
+      } as any;
     },
   };
 }
