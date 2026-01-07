@@ -27,14 +27,14 @@ For a detailed explanation of the problem and solution, see [How I Solved Cascad
 ## Installation
 
 ```bash
-npm install vite-plugin-import-map
+npm install @foony/vite-plugin-import-map
 ```
 
 ## Usage
 
 ```typescript
 import { defineConfig } from 'vite';
-import importMapPlugin from 'vite-plugin-import-map';
+import importMapPlugin from '@foony/vite-plugin-import-map';
 
 export default defineConfig({
   plugins: [
