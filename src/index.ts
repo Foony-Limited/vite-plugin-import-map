@@ -256,7 +256,7 @@ export default function importMapPlugin(options?: ImportMapPluginOptions): Plugi
         chunkMapping.set(filenameOnly, moduleSpec); // Keep old filename for reverse lookups
       }
       const end = performance.now();
-      console.log(`Import map generation completed in ${end - start} ms`);
+      console.log(`Import map generation completed in ${Math.round(end - start)} ms`);
     },
     transformIndexHtml() {
       // Sort import map entries for consistency
