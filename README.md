@@ -59,6 +59,20 @@ Whether to use absolute paths (starting with `/`) or relative paths (starting wi
 - `true` (default): Absolute paths like `/assets/index-abc123.js`. Required for SSG where HTML files are served from subdirectories.
 - `false`: Relative paths like `./assets/index-abc123.js`. Preferred for HTML5 builds that may not be served from root.
 
+## Browser Support
+
+Import Maps are natively supported in modern browsers. See [caniuse.com for Import Maps support](https://caniuse.com/import-maps).
+
+**Safari < 16.4 Support:**
+
+If you need to support Safari versions before 16.4, you'll need to use [es-module-shims](https://github.com/guybedford/es-module-shims) as a polyfill. Add it to your HTML before the import map:
+
+```html
+<script async src="https://ga.jspm.io/npm:es-module-shims@1/dist/es-module-shims.js"></script>
+```
+
+The `es-module-shims` polyfill automatically detects and polyfills import maps in browsers that don't have native support.
+
 ## How It Works
 
 1. **First pass**: Counts base names to detect conflicts (multiple chunks with the same name)
